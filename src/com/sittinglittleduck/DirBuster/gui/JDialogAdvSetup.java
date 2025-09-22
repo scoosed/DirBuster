@@ -1022,7 +1022,7 @@ public class JDialogAdvSetup extends javax.swing.JDialog
         }
 
         /*
-         * read the setting for limiting responces
+         * read the setting for limiting responses
          */
         manager.setLimitRequests(jCheckBoxLimitReqSec.isSelected());
         //TODO add error handling
