@@ -124,8 +124,8 @@ public class Worker implements Runnable
                 url = work.getWork();
                 int code = 0;
 
-                String responce = "";
-                String rawResponce = "";
+                String response = "";
+                String rawresponse = "";
 
                 String responseHeader = "";
                 String responseBody = "";
@@ -243,7 +243,7 @@ public class Worker implements Runnable
                     //set up the input stream
                     BufferedReader input = new BufferedReader(new InputStreamReader(httpget.getResponseBodyAsStream()));
 
-                    //save the headers into a string, used in viewing raw responce
+                    //save the headers into a string, used in viewing raw response
                     String rawHeader;
                     rawHeader = httpget.getStatusLine() + "\r\n";
                     Header headers[] = httpget.getResponseHeaders();
@@ -259,20 +259,20 @@ public class Worker implements Runnable
                     responseHeader = rawHeader;
 
                     buf = new StringBuffer();
-                    //read in the responce body
+                    //read in the response body
                     String line;
                     while((line = input.readLine()) != null)
                     {
                         buf.append("\r\n" + line);
                     }
-                    responce = buf.toString();
+                    response = buf.toString();
 
-                    responseBody = responce;
+                    responseBody = response;
 
                     input.close();
 
-                    rawResponce = rawHeader + responce;
-                    //clean the responce
+                    rawresponse = rawHeader + response;
+                    //clean the response
 
                     //parse the html of what we have found
 
@@ -284,12 +284,12 @@ public class Worker implements Runnable
                         {
                             if(contentType.getValue().startsWith("text"))
                             {
-                                manager.addHTMLToParseQueue(new HTMLparseWorkUnit(responce, work));
+                                manager.addHTMLToParseQueue(new HTMLparseWorkUnit(response, work));
                             }
                         }
                     }
 
-                    responce = FilterResponce.CleanResponce(responce, work);
+                    response = Filterresponse.Cleanresponse(response, work);
 
                     Thread.sleep(10);
                     httpget.releaseConnection();
@@ -313,19 +313,19 @@ public class Worker implements Runnable
 
 
                         //TODO move this option to the Adv options
-                        //if the responce does not match the base case
+                        //if the response does not match the base case
                         Pattern regexFindFile = Pattern.compile(".*file not found.*", Pattern.CASE_INSENSITIVE);
 
-                        Matcher m = regexFindFile.matcher(responce);
+                        Matcher m = regexFindFile.matcher(response);
 
                         //need to clean the base case of the item we are looking for
-                        String basecase = FilterResponce.removeItemCheckedFor(work.getBaseCaseObj().getBaseCase(), work.getItemToCheck());
+                        String basecase = Filterresponse.removeItemCheckedFor(work.getBaseCaseObj().getBaseCase(), work.getItemToCheck());
 
                         if(m.find())
                         {
                             //do nothing as we have a 404
                         }
-                        else if(!responce.equalsIgnoreCase(basecase))
+                        else if(!response.equalsIgnoreCase(basecase))
                         {
                             if(work.isDir())
                             {
@@ -371,7 +371,7 @@ public class Worker implements Runnable
                             }
                             manager.foundFile(url, code, responseHeader, responseBody, work.getBaseCaseObj());
                         }
-                    //manager.foundError(url, "Base Case Mode Error - Responce code came back as " + code + " it should have been 200");
+                    //manager.foundError(url, "Base Case Mode Error - response code came back as " + code + " it should have been 200");
                     //manager.workDone();
                     }
                 }
@@ -382,12 +382,12 @@ public class Worker implements Runnable
                 {
                     Pattern regexFindFile = Pattern.compile(work.getBaseCaseObj().getRegex());
 
-                    Matcher m = regexFindFile.matcher(rawResponce);
+                    Matcher m = regexFindFile.matcher(rawresponse);
                     /*
                     System.out.println("======Trying to find======");
                     System.out.println(work.getBaseCaseObj().getRegex());
                     System.out.println("======In======");
-                    System.out.println(responce);
+                    System.out.println(response);
                     System.out.println("======/In======");
                      */
                     if(m.find())
@@ -410,7 +410,7 @@ public class Worker implements Runnable
                             {
                                 if(contentType.getValue().startsWith("text"))
                                 {
-                                    manager.addHTMLToParseQueue(new HTMLparseWorkUnit(rawResponce, work));
+                                    manager.addHTMLToParseQueue(new HTMLparseWorkUnit(rawresponse, work));
                                 }
                             }
                         }
@@ -432,13 +432,13 @@ public class Worker implements Runnable
                             }
                             manager.foundFile(url, code, responseHeader, responseBody, work.getBaseCaseObj());
                         }
-                    //manager.foundError(url, "Base Case Mode Error - Responce code came back as " + code + " it should have been 200");
+                    //manager.foundError(url, "Base Case Mode Error - response code came back as " + code + " it should have been 200");
                     //manager.workDone();
                     }
 
 
                 }
-                //just check the responce code
+                //just check the response code
                 else
                 {
                     //if is not the fail code, a 404 or a 400 then we have a possible
@@ -448,9 +448,9 @@ public class Worker implements Runnable
                         {
                             if(Config.debug)
                             {
-                                System.out.println("DEBUG Worker[" + threadId + "]: Getting responce via GET " + url.toString());
+                                System.out.println("DEBUG Worker[" + threadId + "]: Getting response via GET " + url.toString());
                             }
-                            rawResponce = "";
+                            rawresponse = "";
 
                             httpget = new GetMethod(url.toString());
                             Vector HTTPheaders = manager.getHTTPHeaders();
@@ -484,9 +484,9 @@ public class Worker implements Runnable
                             responseBody = "";
                             responseHeader = "";
 
-                            rawResponce = "";
+                            rawresponse = "";
                             //build a string version of the headers
-                            rawResponce = httpget.getStatusLine() + "\r\n";
+                            rawresponse = httpget.getStatusLine() + "\r\n";
                             Header headers[] = httpget.getResponseHeaders();
 
                             StringBuffer buf = new StringBuffer();
@@ -497,9 +497,9 @@ public class Worker implements Runnable
 
                             buf.append("\r\n");
 
-                            rawResponce = rawResponce + buf.toString();
+                            rawresponse = rawresponse + buf.toString();
 
-                            responseHeader = rawResponce;
+                            responseHeader = rawresponse;
 
                             if(httpget.getResponseContentLength() > 0)
                             {
@@ -509,20 +509,20 @@ public class Worker implements Runnable
 
                                 String line;
 
-                                String tempResponce = "";
+                                String tempresponse = "";
 
                                 buf = new StringBuffer();
                                 while((line = input.readLine()) != null)
                                 {
                                     buf.append("\r\n" + line);
                                 }
-                                tempResponce = buf.toString();
+                                tempresponse = buf.toString();
 
-                                responseBody = tempResponce;
+                                responseBody = tempresponse;
                                 input.close();
 
 
-                                rawResponce = rawResponce + tempResponce;
+                                rawresponse = rawresponse + tempresponse;
 
 
                                 Header contentType = httpget.getResponseHeader("Content-Type");
@@ -535,7 +535,7 @@ public class Worker implements Runnable
                                     {
                                         if(contentType.getValue().startsWith("text"))
                                         {
-                                            manager.addHTMLToParseQueue(new HTMLparseWorkUnit(tempResponce, work));
+                                            manager.addHTMLToParseQueue(new HTMLparseWorkUnit(tempresponse, work));
                                         }
                                     }
                                 }
