@@ -227,7 +227,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Please examine the responce returned, and enter a regular expression that will match on all 3 of the attemps."/>
+        <Property name="text" type="java.lang.String" value="Please examine the response returned, and enter a regular expression that will match on all 3 of the attemps."/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
