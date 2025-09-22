@@ -33,7 +33,7 @@ public class BaseCase
     //The URL for which the base applies to, eg if we are testing within /wibble/, then this will be set to /wibble/
     private URL baseCaseURL;
     
-    //http responce code for the base case
+    //http response code for the base case
     private int returnCode = 0;
     
     //store of the actual base case if required
