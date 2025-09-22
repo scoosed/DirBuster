@@ -18,17 +18,17 @@ public class Result
 
     private int type = -1;
     private URL itemFound;
-    private int responceCode = 0;
+    private int responseCode = 0;
     private String responseHeader = "";
     private String responseBody = "";
     private BaseCase baseCaseObj = null;
 
-    public Result(int type, URL itemFound, int responceCode, String responceHeader, String responseBody, BaseCase baseCaseObj)
+    public Result(int type, URL itemFound, int responseCode, String responseHeader, String responseBody, BaseCase baseCaseObj)
     {
         this.type = type;
         this.itemFound = itemFound;
-        this.responceCode = responceCode;
-        this.responseHeader = responceHeader;
+        this.responseCode = responseCode;
+        this.responseHeader = responseHeader;
         this.responseBody = responseBody;
         this.baseCaseObj = baseCaseObj;
     }
@@ -53,9 +53,9 @@ public class Result
         return responseHeader;
     }
 
-    public int getResponceCode()
+    public int getresponseCode()
     {
-        return responceCode;
+        return responseCode;
     }
 
     public int getType()
