@@ -91,7 +91,7 @@ public class GenBaseCase
         BaseCase baseCase = null;
         int failcode = 0;
         String failString = Config.failCaseString;
-        String baseResponce = "";
+        String baseResponse = "";
         URL failurl = null;
         if(isDir)
         {
@@ -144,7 +144,7 @@ public class GenBaseCase
         }
         httpget.setFollowRedirects(Config.followRedirects);
 
-        //save the http responce code for the base case
+        //save the http response code for the base case
         failcode = manager.getHttpclient().executeMethod(httpget);
         manager.workDone();
 
@@ -163,35 +163,35 @@ public class GenBaseCase
             {
                 buf.append("\r\n" + tempLine);
             }
-            baseResponce = buf.toString();
+            baseResponse = buf.toString();
             input.close();
 
             //HTMLparse.parseHTML();
 
-            //HTMLparse htmlParse = new HTMLparse(baseResponce, null);
+            //HTMLparse htmlParse = new HTMLparse(baseResponse, null);
             //Thread parse  = new Thread(htmlParse);
             //parse.start();
 
             //clean up the base case, based on the basecase URL
-            baseResponce = FilterResponce.CleanResponce(baseResponce, failurl, failString);
+            baseResponse = FilterResponse.CleanResponse(baseResponse, failurl, failString);
 
             httpget.releaseConnection();
 
             /*
              * get the base case twice more, for consisitency checking
              */
-            String baseResponce1 = baseResponce;
-            String baseResponce2 = getBaseCaseAgain(failurl, failString);
-            String baseResponce3 = getBaseCaseAgain(failurl, failString);
+            String baseResponse1 = baseResponse;
+            String baseResponse2 = getBaseCaseAgain(failurl, failString);
+            String baseResponse3 = getBaseCaseAgain(failurl, failString);
 
 
-            if(baseResponce1 != null && baseResponce2 != null && baseResponce3 != null)
+            if(baseResponse1 != null && baseResponse2 != null && baseResponse3 != null)
             {
                 /*
-                 * check that all the responces are same, if they are do nothing if not enter the if statement
+                 * check that all the responses are same, if they are do nothing if not enter the if statement
                  */
 
-                if(!baseResponce1.equalsIgnoreCase(baseResponce2) || !baseResponce1.equalsIgnoreCase(baseResponce3) || !baseResponce2.equalsIgnoreCase(baseResponce3))
+                if(!baseResponse1.equalsIgnoreCase(baseResponse2) || !baseResponse1.equalsIgnoreCase(baseResponse3) || !baseResponse2.equalsIgnoreCase(baseResponse3))
                 {
                     /*
                      * if we dont have any regex saved
@@ -211,7 +211,7 @@ public class GenBaseCase
                         /*
                          * show diaglog with the three responses, asking the user for a reg instead
                          */
-                        JDialogInconsistentFailCodes dialog = new JDialogInconsistentFailCodes(manager.gui, true, baseResponce1, baseResponce2, baseResponce3, failurl.toString());
+                        JDialogInconsistentFailCodes dialog = new JDialogInconsistentFailCodes(manager.gui, true, baseResponse1, baseResponse2, baseResponse3, failurl.toString());
                         /*
                          * get the returned regex
                          */
@@ -245,9 +245,9 @@ public class GenBaseCase
                             
                             Pattern regexFindFile = Pattern.compile(failCaseRegexes.elementAt(a));
 
-                            Matcher m1 = regexFindFile.matcher(baseResponce1);
-                            Matcher m2 = regexFindFile.matcher(baseResponce2);
-                            Matcher m3 = regexFindFile.matcher(baseResponce3);
+                            Matcher m1 = regexFindFile.matcher(baseResponse1);
+                            Matcher m2 = regexFindFile.matcher(baseResponse2);
+                            Matcher m3 = regexFindFile.matcher(baseResponse3);
 
                             boolean test1 = m1.find();
                             boolean test2 = m2.find();
@@ -279,7 +279,7 @@ public class GenBaseCase
                              * if we get here then we didn't get a match so show the dialog
                              */
 
-                            JDialogInconsistentFailCodes dialog = new JDialogInconsistentFailCodes(manager.gui, true, baseResponce1, baseResponce2, baseResponce3, failurl.toString());
+                            JDialogInconsistentFailCodes dialog = new JDialogInconsistentFailCodes(manager.gui, true, baseResponse1, baseResponse2, baseResponse3, failurl.toString());
                             /*
                              * get the returned regex
                              */
@@ -301,7 +301,7 @@ public class GenBaseCase
                 else
                 {
                     /*
-                     * We have a big problem as now we have different responce codes for the same request
+                     * We have a big problem as now we have different response codes for the same request
                      * //TODO think of a way to deal with is
                      */
                 }
@@ -309,13 +309,13 @@ public class GenBaseCase
 
                 if(Config.debug)
                 {
-                    System.out.println("DEBUG GenBaseCase: base case was set to :" + baseResponce);
+                    System.out.println("DEBUG GenBaseCase: base case was set to :" + baseResponse);
                 }
             }
         }
         httpget.releaseConnection();
 
-        baseCase = new BaseCase(new URL(url), failcode, isDir, failurl, baseResponce, fileExtention, useRegexInstead, regex);
+        baseCase = new BaseCase(new URL(url), failcode, isDir, failurl, baseResponse, fileExtention, useRegexInstead, regex);
 
         //add the new base case to the manager list
         manager.addBaseCase(baseCase);
@@ -333,7 +333,7 @@ public class GenBaseCase
         BaseCase baseCase = null;
         int failcode = 0;
         String failString = Config.failCaseString;
-        String baseResponce = "";
+        String baseResponse = "";
 
         /*
          * markers for using regex instead
@@ -364,7 +364,7 @@ public class GenBaseCase
         }
         httpget.setFollowRedirects(Config.followRedirects);
 
-        //save the http responce code for the base case
+        //save the http response code for the base case
         failcode = manager.getHttpclient().executeMethod(httpget);
         manager.workDone();
 
@@ -382,16 +382,16 @@ public class GenBaseCase
             {
                 buf.append("\r\n" + tempLine);
             }
-            baseResponce = buf.toString();
+            baseResponse = buf.toString();
             input.close();
 
 
             //clean up the base case, based on the basecase URL
-            baseResponce = FilterResponce.CleanResponce(baseResponce, failurl, failString);
+            baseResponse = FilterResponse.CleanResponse(baseResponse, failurl, failString);
 
             if(Config.debug)
             {
-                System.out.println("DEBUG GenBaseCase: base case was set to :" + baseResponce);
+                System.out.println("DEBUG GenBaseCase: base case was set to :" + baseResponse);
             }
         }
 
@@ -400,7 +400,7 @@ public class GenBaseCase
         /*
          * create the base case object
          */
-        baseCase = new BaseCase(null, failcode, false, failurl, baseResponce, null, useRegexInstead, regex);
+        baseCase = new BaseCase(null, failcode, false, failurl, baseResponse, null, useRegexInstead, regex);
 
         return baseCase;
     }
@@ -412,7 +412,7 @@ public class GenBaseCase
     {
         int failcode;
         Manager manager = Manager.getInstance();
-        String baseResponce = "";
+        String baseResponse = "";
 
         GetMethod httpget = new GetMethod(failurl.toString());
         //set the custom HTTP headers
@@ -435,7 +435,7 @@ public class GenBaseCase
         }
         httpget.setFollowRedirects(Config.followRedirects);
 
-        //save the http responce code for the base case
+        //save the http response code for the base case
         failcode = manager.getHttpclient().executeMethod(httpget);
         manager.workDone();
 
@@ -454,29 +454,29 @@ public class GenBaseCase
             {
                 buf.append("\r\n" + tempLine);
             }
-            baseResponce = buf.toString();
+            baseResponse = buf.toString();
             input.close();
 
             //HTMLparse.parseHTML();
 
-            //HTMLparse htmlParse = new HTMLparse(baseResponce, null);
+            //HTMLparse htmlParse = new HTMLparse(baseResponse, null);
             //Thread parse  = new Thread(htmlParse);
             //parse.start();
 
             //clean up the base case, based on the basecase URL
-            baseResponce = FilterResponce.CleanResponce(baseResponce, failurl, failString);
+            baseResponse = FilterResponse.CleanResponse(baseResponse, failurl, failString);
 
             httpget.releaseConnection();
 
             /*
-             * return the cleaned responce
+             * return the cleaned response
              */
-            return baseResponce;
+            return baseResponse;
         }
         else
         {
             /*
-             * we have a big problem here as the server has returned an other responce code, for the same request
+             * we have a big problem here as the server has returned an other response code, for the same request
              * TODO: think of a way to deal with this!
              */
             return null;
