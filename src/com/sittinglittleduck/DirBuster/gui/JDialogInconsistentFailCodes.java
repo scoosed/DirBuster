@@ -39,12 +39,12 @@ public class JDialogInconsistentFailCodes extends javax.swing.JDialog
     private String url;
 
     /** Creates new form JDialogInconsistentFailCodes */
-    public JDialogInconsistentFailCodes(java.awt.Frame parent, boolean modal, String response1, String responce2, String responce3, String url)
+    public JDialogInconsistentFailCodes(java.awt.Frame parent, boolean modal, String response1, String response2, String response3, String url)
     {
         super(parent, modal);
         this.response1 = response1;
-        this.response2 = responce2;
-        this.response3 = responce3;
+        this.response2 = response2;
+        this.response3 = response3;
         this.url = url;
         initComponents();
         
@@ -54,12 +54,12 @@ public class JDialogInconsistentFailCodes extends javax.swing.JDialog
         jTextAreaResponse1.setCaretPosition(0);
         jTextAreaResponse2.setText(response2);
         jTextAreaResponse2.setCaretPosition(0);
-        jTextAreaRsponce3.setText(responce3);
+        jTextAreaRsponce3.setText(response3);
         jTextAreaRsponce3.setCaretPosition(0);
 
         String temp1a[] = response1.split("\r?\n");
-        String temp2a[] = responce2.split("\r?\n");
-        String temp3a[] = responce3.split("\r?\n");
+        String temp2a[] = response2.split("\r?\n");
+        String temp3a[] = response3.split("\r?\n");
 
         Diff d1 = new Diff(temp1a, temp2a);
         Diff d2 = new Diff(temp1a, temp3a);
@@ -170,7 +170,7 @@ public class JDialogInconsistentFailCodes extends javax.swing.JDialog
 
         jLabelFailURL.setText("url");
 
-        jLabel4.setText("Please examine the responce returned, and enter a regular expression that will match on all 3 of the attemps.");
+        jLabel4.setText("Please examine the response returned, and enter a regular expression that will match on all 3 of the attemps.");
 
         jLabel5.setText("The reglar expression will then be used to determine if the dir/files does or does not exist.");
 
@@ -346,8 +346,8 @@ private void jButtonOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                         this,
                         "Test results\n" +
                         "response 1: " + result1 + "\n" +
-                        "responce 2: " + result2 + "\n" +
-                        "responce 3: " + result3 + "\n" +
+                        "response 2: " + result2 + "\n" +
+                        "response 3: " + result3 + "\n" +
                         "Your regex does not work all the responses returned, please try again.",
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
@@ -404,8 +404,8 @@ private void jButtonTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         this,
                         "Test results\n" +
                         "response 1: Pass\n" +
-                        "responce 2: Pass\n" +
-                        "responce 3: Pass\n" +
+                        "response 2: Pass\n" +
+                        "response 3: Pass\n" +
                         "This regex should work",
                         "Regex Matches",
                         JOptionPane.INFORMATION_MESSAGE);
@@ -436,8 +436,8 @@ private void jButtonTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         this,
                         "Test results\n" +
                         "response 1: " + result1 + "\n" +
-                        "responce 2: " + result2 + "\n" +
-                        "responce 3: " + result3 + "\n" +
+                        "response 2: " + result2 + "\n" +
+                        "response 3: " + result3 + "\n" +
                         "Your regex does not work all the responses returned, please try again.",
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
