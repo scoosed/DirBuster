@@ -116,7 +116,7 @@ public class ResultsTableTreeModel extends AbstractTreeTableModel
                 }
                 else
                 {
-                    return resultsNode.result.getResponceCode();
+                    return resultsNode.result.getresponseCode();
                 }
             }
             else
