@@ -91,7 +91,7 @@ public class ResultsNode extends DefaultMutableTreeNode
         {
 
             string = covertData(new URL(result.getItemFound().toString()));
-            //return result.getFieldFound() + " | " + result.getFieldResponceCode();
+            //return result.getFieldFound() + " | " + result.getFieldresponseCode();
         }
         catch (MalformedURLException ex)
         {
