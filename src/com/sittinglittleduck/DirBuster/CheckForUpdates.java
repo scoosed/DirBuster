@@ -76,9 +76,9 @@ public class CheckForUpdates implements Runnable
              * query the site to find out is there any updates
              */
             GetMethod httpget = new GetMethod(updateURL);
-            int responceCode = httpclient.executeMethod(httpget);
+            int responseCode = httpclient.executeMethod(httpget);
 
-            if(responceCode == 200)
+            if(responseCode == 200)
             {
                 if(httpget.getResponseContentLength() > 0)
                 {
@@ -88,29 +88,29 @@ public class CheckForUpdates implements Runnable
 
                     String line;
 
-                    String responce = "";
+                    String response = "";
 
                     StringBuffer buf = new StringBuffer();
                     while((line = input.readLine()) != null)
                     {
                         buf.append("\r\n" + line);
                     }
-                    responce = buf.toString();
+                    response = buf.toString();
                     input.close();
 
-                    //System.out.println("Got a responce form the update server");
+                    //System.out.println("Got a response form the update server");
                     //System.out.println("-------------------------------------");
-                    //System.out.println(responce);
+                    //System.out.println(response);
                     //System.out.println("-------------------------------------");
                     /*
-                     * extract the data from the responce
+                     * extract the data from the response
                      */
                     String versionRegex = "<version current=\\\"(.*?)\\\"/>";
                     String changeLogRegex = "<changelog>(.*?)</changelog>";
 
                     Pattern regexFindFile = Pattern.compile(versionRegex);
 
-                    Matcher m = regexFindFile.matcher(responce);
+                    Matcher m = regexFindFile.matcher(response);
 
                     if(m.find())
                     {
@@ -134,7 +134,7 @@ public class CheckForUpdates implements Runnable
                              */
                             Pattern regexFindChangeLog = Pattern.compile(changeLogRegex, Pattern.DOTALL);
 
-                            m = regexFindChangeLog.matcher(responce);
+                            m = regexFindChangeLog.matcher(response);
 
                             if(m.find())
                             {
