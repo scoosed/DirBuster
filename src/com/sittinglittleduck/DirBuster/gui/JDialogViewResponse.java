@@ -1,5 +1,5 @@
 /*
- * JDialogViewResponce.java
+ * JDialogViewresponse.java
  *
  * Created on 30 June 2006, 21:40
  *
@@ -37,19 +37,19 @@ public class JDialogViewResponse extends javax.swing.JDialog
 {
     private BaseCase baseCaseObj;
     
-    /** Creates new form JDialogViewResponce */
+    /** Creates new form JDialogViewresponse */
     public JDialogViewResponse(java.awt.Frame parent, boolean modal, Result result)
     {
         super(parent, modal);
         initComponents();
         this.setTitle("DirBuster " + Config.version + " View Response");
 
-        this.jTextAreaResponce.setText(result.getResponseHeader() + result.getResponseBody());
-        jTextAreaResponce.setCaretPosition(0);
+        this.jTextArearesponse.setText(result.getResponseHeader() + result.getResponseBody());
+        jTextArearesponse.setCaretPosition(0);
         this.baseCaseObj = result.getBaseCaseObj();
         //System.out.println("View Dialog");
-        //System.out.println(Responce);
-        this.jLabelURL.setText("Responce for " + result.getItemFound().toString());
+        //System.out.println(response);
+        this.jLabelURL.setText("response for " + result.getItemFound().toString());
         if(result.getBaseCaseObj().getBaseCase() == null)
         {
            jTabbedPane1.setEnabledAt(2, false);
@@ -59,8 +59,8 @@ public class JDialogViewResponse extends javax.swing.JDialog
         {
             jTabbedPane1.setEnabledAt(2, true);
             jTabbedPane1.setEnabledAt(3, true);
-            jTextAreaResponceCompear.setText(result.getResponseBody());
-            jTextAreaResponceCompear.setCaretPosition(0);
+            jTextArearesponseCompear.setText(result.getResponseBody());
+            jTextArearesponseCompear.setCaretPosition(0);
             jTextAreaBaseCompear.setText(baseCaseObj.getBaseCase());
             jTextAreaBaseCompear.setCaretPosition(0);
             
@@ -84,7 +84,7 @@ public class JDialogViewResponse extends javax.swing.JDialog
         if(baseCaseObj != null)
         {
             jLabelBaseCaseURL.setText(baseCaseObj.getBaseCaseRequestURL().toString());
-            jLabelHTTPResponceCode.setText(String.valueOf(baseCaseObj.getFailCode()));
+            jLabelHTTPresponseCode.setText(String.valueOf(baseCaseObj.getFailCode()));
         }
         
         //this.jScrollPane1.setViewport(null);
@@ -103,16 +103,16 @@ public class JDialogViewResponse extends javax.swing.JDialog
         jButtonClose = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextAreaResponce = new javax.swing.JTextArea();
+        jTextArearesponse = new javax.swing.JTextArea();
         jPanelBaseCase = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabelBaseCaseURL = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabelHTTPResponceCode = new javax.swing.JLabel();
+        jLabelHTTPresponseCode = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextAreaResponceCompear = new javax.swing.JTextArea();
+        jTextArearesponseCompear = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextAreaBaseCompear = new javax.swing.JTextArea();
         jScrollPaneDiff = new javax.swing.JScrollPane();
@@ -132,10 +132,10 @@ public class JDialogViewResponse extends javax.swing.JDialog
 
         jTabbedPane1.setFont(new java.awt.Font("Arial", 0, 12));
 
-        jTextAreaResponce.setColumns(20);
-        jTextAreaResponce.setFont(new java.awt.Font("Arial", 0, 12));
-        jTextAreaResponce.setRows(5);
-        jScrollPane1.setViewportView(jTextAreaResponce);
+        jTextArearesponse.setColumns(20);
+        jTextArearesponse.setFont(new java.awt.Font("Arial", 0, 12));
+        jTextArearesponse.setRows(5);
+        jScrollPane1.setViewportView(jTextArearesponse);
 
         jTabbedPane1.addTab("Raw Response", jScrollPane1);
 
@@ -152,14 +152,14 @@ public class JDialogViewResponse extends javax.swing.JDialog
         jLabelBaseCaseURL.setBounds(10, 40, 570, 14);
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 11));
-        jLabel2.setText("HTTP Responce Code For Base Case: ");
+        jLabel2.setText("HTTP response Code For Base Case: ");
         jPanelBaseCase.add(jLabel2);
         jLabel2.setBounds(10, 70, 220, 14);
 
-        jLabelHTTPResponceCode.setFont(new java.awt.Font("Arial", 0, 11));
-        jLabelHTTPResponceCode.setText("No Information");
-        jPanelBaseCase.add(jLabelHTTPResponceCode);
-        jLabelHTTPResponceCode.setBounds(220, 70, 200, 14);
+        jLabelHTTPresponseCode.setFont(new java.awt.Font("Arial", 0, 11));
+        jLabelHTTPresponseCode.setText("No Information");
+        jPanelBaseCase.add(jLabelHTTPresponseCode);
+        jLabelHTTPresponseCode.setBounds(220, 70, 200, 14);
 
         jButton1.setFont(new java.awt.Font("Arial", 0, 11));
         jButton1.setText("View In Browser");
@@ -176,10 +176,10 @@ public class JDialogViewResponse extends javax.swing.JDialog
         jSplitPane1.setDividerLocation(300);
         jSplitPane1.setDividerSize(2);
 
-        jTextAreaResponceCompear.setColumns(20);
-        jTextAreaResponceCompear.setFont(new java.awt.Font("Arial", 0, 12));
-        jTextAreaResponceCompear.setRows(5);
-        jScrollPane2.setViewportView(jTextAreaResponceCompear);
+        jTextArearesponseCompear.setColumns(20);
+        jTextArearesponseCompear.setFont(new java.awt.Font("Arial", 0, 12));
+        jTextArearesponseCompear.setRows(5);
+        jScrollPane2.setViewportView(jTextArearesponseCompear);
 
         jSplitPane1.setLeftComponent(jScrollPane2);
 
@@ -255,7 +255,7 @@ public class JDialogViewResponse extends javax.swing.JDialog
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelBaseCaseURL;
-    private javax.swing.JLabel jLabelHTTPResponceCode;
+    private javax.swing.JLabel jLabelHTTPresponseCode;
     private javax.swing.JLabel jLabelURL;
     private javax.swing.JPanel jPanelBaseCase;
     private javax.swing.JScrollPane jScrollPane1;
@@ -265,8 +265,8 @@ public class JDialogViewResponse extends javax.swing.JDialog
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea jTextAreaBaseCompear;
-    private javax.swing.JTextArea jTextAreaResponce;
-    private javax.swing.JTextArea jTextAreaResponceCompear;
+    private javax.swing.JTextArea jTextArearesponse;
+    private javax.swing.JTextArea jTextArearesponseCompear;
     private javax.swing.JTextPane jTextPaneDiff;
     // End of variables declaration//GEN-END:variables
     
